@@ -31,4 +31,15 @@ group by location;
 
 ----- show the age distributionof the employee
 
+alter table `human resource`
+add column age int;
+update `human resource`
+set age =timestampdiff(YEAR, birthday, CURDATE());
 
+SELECT 
+concat(FLOOR(TIMESTAMPDIFF(YEAR, birthdate, CURDATE())/10) *10, '-', FLOOR(TIMESTAMPDIFF(YEAR, birthdate, CURDATE())/10) *10+9) AS age_range,
+count(*) as number_of_employees
+from 
+`human resource`
+group by age_range
+order by age_range;
